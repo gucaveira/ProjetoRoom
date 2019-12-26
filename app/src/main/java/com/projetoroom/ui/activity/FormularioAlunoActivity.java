@@ -9,8 +9,9 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.projetoroom.R;
-import com.projetoroom.dao.AlunoDAO;
 import com.projetoroom.model.Aluno;
+import com.projetoroom.room.ProjetoDatabase;
+import com.projetoroom.room.dao.AlunoDao;
 
 import static com.projetoroom.ui.activity.ConstantesActivities.CHAVE_ALUNO;
 
@@ -22,13 +23,15 @@ public class FormularioAlunoActivity extends AppCompatActivity {
     private EditText campoNome;
     private EditText campoTelefone;
     private EditText campoEmail;
-    private final AlunoDAO dao = new AlunoDAO();
+    private AlunoDao dao;
     private Aluno aluno;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario_aluno);
+        ProjetoDatabase database = ProjetoDatabase.getInstance(this);
+        dao = database.getRoomAlunoDAO();
         inicializacaoDosCampos();
         carregaAluno();
     }

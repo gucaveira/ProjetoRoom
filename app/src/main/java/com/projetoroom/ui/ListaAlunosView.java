@@ -6,25 +6,21 @@ import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import androidx.room.Room;
-
 import com.projetoroom.model.Aluno;
 import com.projetoroom.room.ProjetoDatabase;
-import com.projetoroom.room.dao.RoomAlunoDao;
+import com.projetoroom.room.dao.AlunoDao;
 import com.projetoroom.ui.adapter.ListaAlunosAdapter;
 
 public class ListaAlunosView {
 
     private final ListaAlunosAdapter adapter;
-    private final RoomAlunoDao dao;
+    private final AlunoDao dao;
     private final Context context;
 
     public ListaAlunosView(Context context) {
         this.context = context;
         this.adapter = new ListaAlunosAdapter(this.context);
-        dao = Room.databaseBuilder(context, ProjetoDatabase.class, "agenda.db")
-                .allowMainThreadQueries()
-                .build().getRoomAlunoDAO();
+        dao = ProjetoDatabase.getInstance(context).getRoomAlunoDAO();
     }
 
     public void confirmaRemocao(final MenuItem item) {
