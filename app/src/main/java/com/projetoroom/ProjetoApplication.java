@@ -2,8 +2,11 @@ package com.projetoroom;
 
 import android.app.Application;
 
-import com.projetoroom.dao.AlunoDAO;
+import androidx.room.Room;
+
 import com.projetoroom.model.Aluno;
+import com.projetoroom.room.ProjetoDatabase;
+import com.projetoroom.room.dao.RoomAlunoDao;
 
 
 @SuppressWarnings("WeakerAccess")
@@ -16,7 +19,10 @@ public class ProjetoApplication extends Application {
     }
 
     private void criaAlunosDeTeste() {
-        AlunoDAO dao = new AlunoDAO();
+        ProjetoDatabase database = Room.databaseBuilder(
+                this, ProjetoDatabase.class, "agenda.db")
+                .build();
+        RoomAlunoDao dao = database.getRoomAlunoDAO();
         dao.salva(new Aluno("Alex", "1122223333", "alex@alura.com.br"));
         dao.salva(new Aluno("Fran", "1122223333", "fran@gmail.com"));
     }
