@@ -21,6 +21,7 @@ public class ProjetoApplication extends Application {
     private void criaAlunosDeTeste() {
         ProjetoDatabase database = Room.databaseBuilder(
                 this, ProjetoDatabase.class, "agenda.db")
+                .allowMainThreadQueries()
                 .build();
         RoomAlunoDao dao = database.getRoomAlunoDAO();
         dao.salva(new Aluno("Alex", "1122223333", "alex@alura.com.br"));
