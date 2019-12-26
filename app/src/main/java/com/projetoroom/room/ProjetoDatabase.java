@@ -9,7 +9,7 @@ import androidx.room.RoomDatabase;
 import com.projetoroom.model.Aluno;
 import com.projetoroom.room.dao.AlunoDao;
 
-@Database(entities = {Aluno.class}, version = 1, exportSchema = false)
+@Database(entities = {Aluno.class}, version = 2, exportSchema = false)
 public abstract class ProjetoDatabase extends RoomDatabase {
 
     private static final String AGENDA_DB = "agenda.db";
