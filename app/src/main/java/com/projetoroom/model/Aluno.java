@@ -13,7 +13,6 @@ public class Aluno implements Serializable {
     private int id = 0;
 
     private String nome;
-    private String sobrenome;
     private String telefone;
     private String email;
 
@@ -26,14 +25,6 @@ public class Aluno implements Serializable {
         this.nome = nome;
         this.telefone = telefone;
         this.email = email;
-    }
-
-    public String getSobrenome() {
-        return sobrenome;
-    }
-
-    public void setSobrenome(String sobrenome) {
-        this.sobrenome = sobrenome;
     }
 
     public int getId() {
@@ -73,6 +64,6 @@ public class Aluno implements Serializable {
     }
 
     public String getNomeCompleto() {
-        return nome + " " + sobrenome;
+        return nome;
     }
 }
