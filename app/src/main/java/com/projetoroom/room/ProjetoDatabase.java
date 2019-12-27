@@ -6,13 +6,16 @@ import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.projetoroom.model.Aluno;
+import com.projetoroom.room.converter.ConversorCalendar;
 import com.projetoroom.room.dao.AlunoDao;
 
-@Database(entities = {Aluno.class}, version = 3, exportSchema = false)
+@Database(entities = {Aluno.class}, version = 4, exportSchema = false)
+@TypeConverters({ConversorCalendar.class})
 public abstract class ProjetoDatabase extends RoomDatabase {
 
     private static final String AGENDA_DB = "agenda.db";
@@ -25,7 +28,7 @@ public abstract class ProjetoDatabase extends RoomDatabase {
                 .addMigrations(new Migration(1, 2) {
                     @Override
                     public void migrate(@NonNull SupportSQLiteDatabase database) {
-                        database.execSQL("ALTER TABLE aluno ADD COLUMN sobrenome TEXT");
+                        database.execSQL("ALTER TABLE Aluno ADD COLUMN sobrenome TEXT");
                     }
                 }, new Migration(2, 3) {
                     @Override
@@ -44,6 +47,11 @@ public abstract class ProjetoDatabase extends RoomDatabase {
 
                         // Renomear a tabela nova com o nome da tabela antiga
                         database.execSQL("ALTER TABLE Aluno_novo RENAME TO Aluno");
+                    }
+                }, new Migration(3, 4) {
+                    @Override
+                    public void migrate(@NonNull SupportSQLiteDatabase database) {
+                        database.execSQL("ALTER TABLE Aluno ADD COLUMN momentoDeCadastro INTEGER");
                     }
                 })
                 .build();
