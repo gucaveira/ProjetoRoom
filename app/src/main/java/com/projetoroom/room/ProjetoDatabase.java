@@ -19,6 +19,7 @@ public abstract class ProjetoDatabase extends RoomDatabase {
     public static ProjetoDatabase getInstance(Context context) {
         return Room.databaseBuilder(context, ProjetoDatabase.class, AGENDA_DB)
                 .allowMainThreadQueries()
+                .fallbackToDestructiveMigration()
                 .build();
     }
 }
