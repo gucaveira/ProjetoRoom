@@ -4,10 +4,15 @@ import androidx.annotation.NonNull;
 import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.projetoroom.model.TipoTelefone;
+
+import static com.projetoroom.model.TipoTelefone.FIXO;
+
 class Migracao {
 
     static Migration[] getMigracao() {
-        return new Migration[]{MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5};
+        return new Migration[]{MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4,
+                MIGRATION_4_5, MIGRATION_5_6};
     }
 
     private static final Migration MIGRATION_1_2 = new Migration(1, 2) {
@@ -61,6 +66,35 @@ class Migracao {
             database.execSQL("DROP TABLE Aluno");
 
             database.execSQL("ALTER TABLE Aluno_novo RENAME TO Aluno");
+        }
+    };
+
+    private static final Migration MIGRATION_5_6 = new Migration(5, 6) {
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase database) {
+            database.execSQL("CREATE TABLE IF NOT EXISTS `Aluno_novo`" +
+                    " (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
+                    " `nome` TEXT," +
+                    " `email` TEXT," +
+                    " `momentoDeCadastro` INTEGER)");
+
+            database.execSQL("INSERT INTO Aluno_novo (id, nome, email, momentoDeCadastro)" +
+                    "SELECT id, nome, email, momentoDeCadastro FROM Aluno");
+
+            database.execSQL("CREATE TABLE IF NOT EXISTS `Telefone`" +
+                    " (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
+                    " `numero` TEXT," +
+                    " `alunoId` INTEGER NOT NULL," +
+                    " `tipo` TEXT)");
+
+            database.execSQL("INSERT INTO Telefone (numero,alunoId)" +
+                    "SELECT telefoneFixo, id FROM Aluno");
+
+            database.execSQL("UPDATE Telefone SET tipo = ?", new TipoTelefone[]{FIXO});
+
+            database.execSQL("DROP TABLE Aluno");
+
+            database.execSQL("ALTER TABLE Aluno_NOVO RENAME TO Aluno");
         }
     };
 }
