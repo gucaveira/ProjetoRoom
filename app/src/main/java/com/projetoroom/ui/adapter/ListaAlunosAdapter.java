@@ -53,7 +53,7 @@ public class ListaAlunosAdapter extends BaseAdapter {
         nome.setText(aluno.getNome());// + " " + aluno.dataFormatada());
         TextView telefone = view.findViewById(R.id.item_aluno_telefone);
         TelefoneDAO dao = ProjetoDatabase.getInstance(context).getTelefoneDAO();
-        Telefone primeiroTelefone = dao.buscaPrimeiroTelefoneDoAluno();
+        Telefone primeiroTelefone = dao.buscaPrimeiroTelefoneDoAluno(aluno.getId());
         telefone.setText(primeiroTelefone.getNumero());
     }
 
