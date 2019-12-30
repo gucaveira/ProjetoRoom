@@ -25,6 +25,4 @@ public abstract class ProjetoDatabase extends RoomDatabase {
                 .addMigrations(Migracao.getMigracao())
                 .build();
     }
-
-
 }

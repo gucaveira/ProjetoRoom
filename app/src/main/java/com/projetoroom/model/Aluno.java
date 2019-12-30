@@ -14,9 +14,10 @@ public class Aluno implements Serializable {
     private int id = 0;
 
     private String nome;
-    private String telefone;
+    private String telefoneFixo;
     private String email;
     private Calendar momentoDeCadastro = Calendar.getInstance();
+    private String telefoneCelular;
 
     public Calendar getMomentoDeCadastro() {
         return momentoDeCadastro;
@@ -42,12 +43,12 @@ public class Aluno implements Serializable {
         this.nome = nome;
     }
 
-    public String getTelefone() {
-        return telefone;
+    public String getTelefoneFixo() {
+        return telefoneFixo;
     }
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+    public void setTelefoneFixo(String telefoneFixo) {
+        this.telefoneFixo = telefoneFixo;
     }
 
     public String getEmail() {
@@ -56,6 +57,14 @@ public class Aluno implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getTelefoneCelular() {
+        return telefoneCelular;
+    }
+
+    public void setTelefoneCelular(String telefoneCelular) {
+        this.telefoneCelular = telefoneCelular;
     }
 
     public boolean temIdValido() {
