@@ -1,4 +1,4 @@
-package com.projetoroom.room.converter;
+package com.projetoroom.room.conversor;
 
 import androidx.room.TypeConverter;
 
