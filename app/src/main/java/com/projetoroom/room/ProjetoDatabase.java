@@ -22,12 +22,12 @@ public abstract class ProjetoDatabase extends RoomDatabase {
 
     public abstract AlunoDao getRoomAlunoDAO();
 
+    public abstract TelefoneDAO getTelefoneDAO();
+
     public static ProjetoDatabase getInstance(Context context) {
         return Room.databaseBuilder(context, ProjetoDatabase.class, AGENDA_DB)
                 .allowMainThreadQueries()
                 .addMigrations(Migracao.getMigracao())
                 .build();
     }
-
-    public abstract TelefoneDAO getTelefoneDAO();
 }

@@ -8,7 +8,6 @@ import com.projetoroom.model.Telefone;
 @Dao
 public interface TelefoneDAO {
 
-    @Query("SELECT Telefone.* FROM Telefone JOIN Aluno ON Telefone.alunoId  = Aluno.id " +
-            " WHERE Telefone.id = :alunoId LIMIT 1")
+    @Query("SELECT * FROM Telefone WHERE alunoId = :alunoId LIMIT 1")
     Telefone buscaPrimeiroTelefoneDoAluno(int alunoId);
 }
