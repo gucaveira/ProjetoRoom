@@ -9,6 +9,9 @@ import android.widget.TextView;
 
 import com.projetoroom.R;
 import com.projetoroom.model.Aluno;
+import com.projetoroom.model.Telefone;
+import com.projetoroom.room.ProjetoDatabase;
+import com.projetoroom.room.dao.TelefoneDAO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +52,9 @@ public class ListaAlunosAdapter extends BaseAdapter {
         TextView nome = view.findViewById(R.id.item_aluno_nome);
         nome.setText(aluno.getNome());// + " " + aluno.dataFormatada());
         TextView telefone = view.findViewById(R.id.item_aluno_telefone);
-        telefone.setText(aluno.getTelefoneFixo());
+        TelefoneDAO dao = ProjetoDatabase.getInstance(context).getTelefoneDAO();
+        Telefone primeiroTelefone = dao.buscaPrimeiroTelefoneDoAluno();
+        telefone.setText(primeiroTelefone.getNumero());
     }
 
     private View criaView(ViewGroup viewGroup) {

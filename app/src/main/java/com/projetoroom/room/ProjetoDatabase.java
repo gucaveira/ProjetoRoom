@@ -12,6 +12,7 @@ import com.projetoroom.model.Telefone;
 import com.projetoroom.room.conversor.ConversorCalendar;
 import com.projetoroom.room.conversor.ConversorTipoTelefone;
 import com.projetoroom.room.dao.AlunoDao;
+import com.projetoroom.room.dao.TelefoneDAO;
 
 @Database(entities = {Aluno.class, Telefone.class}, version = 6, exportSchema = false)
 @TypeConverters({ConversorCalendar.class, ConversorTipoTelefone.class})
@@ -27,4 +28,6 @@ public abstract class ProjetoDatabase extends RoomDatabase {
                 .addMigrations(Migracao.getMigracao())
                 .build();
     }
+
+    public abstract TelefoneDAO getTelefoneDAO();
 }
