@@ -22,6 +22,13 @@ public class Telefone {
     private int alunoId;
     private TipoTelefone tipo;
 
+    public Telefone(String numeroFixo, TipoTelefone fixo, int alunoId) {
+
+        this.numero = numeroFixo;
+        this.tipo = fixo;
+        this.alunoId = alunoId;
+    }
+
     public int getAlunoId() {
         return alunoId;
     }

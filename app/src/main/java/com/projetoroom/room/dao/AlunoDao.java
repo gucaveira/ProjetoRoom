@@ -14,7 +14,7 @@ import java.util.List;
 public interface AlunoDao {
 
     @Insert
-    void salva(Aluno aluno);
+    Long salva(Aluno aluno);
 
     @Query("SELECT * FROM Aluno")
     List<Aluno> todos();
