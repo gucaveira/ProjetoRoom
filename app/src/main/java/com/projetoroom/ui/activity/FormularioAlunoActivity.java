@@ -16,6 +16,8 @@ import com.projetoroom.room.ProjetoDatabase;
 import com.projetoroom.room.dao.AlunoDao;
 import com.projetoroom.room.dao.TelefoneDAO;
 
+import java.util.List;
+
 import static com.projetoroom.ui.activity.ConstantesActivities.CHAVE_ALUNO;
 
 
@@ -30,6 +32,7 @@ public class FormularioAlunoActivity extends AppCompatActivity {
     private AlunoDao alunoDao;
     private Aluno aluno;
     private TelefoneDAO telefoneDAO;
+    private List<Telefone> telefonesDoAluno;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,15 +75,35 @@ public class FormularioAlunoActivity extends AppCompatActivity {
 
     private void preencheCampos() {
         campoNome.setText(aluno.getNome());
-        // campoTelefoneFixo.setText(aluno.getTelefoneFixo());
-        // campoTelefoneCelular.setText(aluno.getTelefoneCelular());
         campoEmail.setText(aluno.getEmail());
+        telefonesDoAluno = telefoneDAO
+                .buscaTodosTelefoneDoAlunosaluno(aluno.getId());
+
+        for (Telefone telefone :
+                telefonesDoAluno) {
+            if (telefone.getTipo() == TipoTelefone.FIXO) {
+                campoTelefoneFixo.setText(telefone.getNumero());
+            } else {
+                campoTelefoneCelular.setText(telefone.getNumero());
+            }
+        }
     }
 
     private void finalizaFormulario() {
         preencheAluno();
         if (aluno.temIdValido()) {
             alunoDao.edita(aluno);
+            for (Telefone telefone :
+                    telefonesDoAluno) {
+                if (telefone.getTipo() == TipoTelefone.FIXO) {
+                    String numeroFixo = campoTelefoneFixo.getText().toString();
+                    telefone.setNumero(numeroFixo);
+                } else {
+                    String numeroCelular = campoTelefoneCelular.getText().toString();
+                    telefone.setNumero(numeroCelular);
+                }
+                telefoneDAO.atualiza(telefonesDoAluno);
+            }
         } else {
             int alunoId = alunoDao.salva(aluno).intValue();
             String numeroFixo = campoTelefoneFixo.getText().toString();
