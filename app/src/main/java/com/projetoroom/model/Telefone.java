@@ -23,7 +23,6 @@ public class Telefone {
     private TipoTelefone tipo;
 
     public Telefone(String numeroFixo, TipoTelefone fixo, int alunoId) {
-
         this.numero = numeroFixo;
         this.tipo = fixo;
         this.alunoId = alunoId;
