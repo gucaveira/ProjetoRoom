@@ -2,8 +2,8 @@ package com.projetoroom.room.dao;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
-import androidx.room.Update;
 
 import com.projetoroom.model.Telefone;
 
@@ -19,8 +19,8 @@ public interface TelefoneDAO {
     void salva(Telefone... telefones);
 
     @Query("SELECT * FROM Telefone WHERE alunoId = :alunoId")
-    List<Telefone> buscaTodosTelefoneDoAlunosaluno(int alunoId);
+    List<Telefone> buscaTodosTelefonesDoAluno(int alunoId);
 
-    @Update
-    void atualiza(List<Telefone> telefones);
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void atualiza(Telefone... telefones);
 }

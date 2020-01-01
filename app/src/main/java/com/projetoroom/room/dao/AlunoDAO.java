@@ -11,7 +11,7 @@ import com.projetoroom.model.Aluno;
 import java.util.List;
 
 @Dao
-public interface AlunoDao {
+public interface AlunoDAO {
 
     @Insert
     Long salva(Aluno aluno);

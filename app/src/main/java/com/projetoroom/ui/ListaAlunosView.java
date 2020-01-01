@@ -8,19 +8,19 @@ import android.widget.ListView;
 
 import com.projetoroom.model.Aluno;
 import com.projetoroom.room.ProjetoDatabase;
-import com.projetoroom.room.dao.AlunoDao;
+import com.projetoroom.room.dao.AlunoDAO;
 import com.projetoroom.ui.adapter.ListaAlunosAdapter;
 
 public class ListaAlunosView {
 
     private final ListaAlunosAdapter adapter;
-    private final AlunoDao dao;
+    private final AlunoDAO dao;
     private final Context context;
 
     public ListaAlunosView(Context context) {
         this.context = context;
         this.adapter = new ListaAlunosAdapter(this.context);
-        dao = ProjetoDatabase.getInstance(context).getRoomAlunoDAO();
+        dao = ProjetoDatabase.getInstance(context).getAlunoDAO();
     }
 
     public void confirmaRemocao(final MenuItem item) {

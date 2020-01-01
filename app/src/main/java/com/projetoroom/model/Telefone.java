@@ -22,10 +22,9 @@ public class Telefone {
     private int alunoId;
     private TipoTelefone tipo;
 
-    public Telefone(String numeroFixo, TipoTelefone fixo, int alunoId) {
-        this.numero = numeroFixo;
-        this.tipo = fixo;
-        this.alunoId = alunoId;
+    public Telefone(String numero, TipoTelefone tipo) {
+        this.numero = numero;
+        this.tipo = tipo;
     }
 
     public int getAlunoId() {
@@ -34,9 +33,6 @@ public class Telefone {
 
     public void setAlunoId(int alunoId) {
         this.alunoId = alunoId;
-    }
-
-    public Telefone() {
     }
 
     public int getId() {

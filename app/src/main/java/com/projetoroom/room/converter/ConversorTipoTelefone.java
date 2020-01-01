@@ -1,4 +1,4 @@
-package com.projetoroom.room.conversor;
+package com.projetoroom.room.converter;
 
 import androidx.room.TypeConverter;
 
@@ -14,7 +14,7 @@ public class ConversorTipoTelefone {
     @TypeConverter
     public TipoTelefone toTipoTelefone(String valor) {
         if (valor != null) {
-            TipoTelefone.valueOf(valor);
+            return TipoTelefone.valueOf(valor);
         }
         return TipoTelefone.FIXO;
     }
