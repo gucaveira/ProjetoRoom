@@ -6,6 +6,7 @@ import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.projetoroom.asynctask.BuscaAlunoTask;
 import com.projetoroom.model.Aluno;
 import com.projetoroom.room.ProjetoDatabase;
 import com.projetoroom.room.dao.AlunoDAO;
@@ -39,7 +40,7 @@ public class ListaAlunosView {
     }
 
     public void atualizaAlunos() {
-        adapter.atualiza(dao.todos());
+        new BuscaAlunoTask(dao, adapter).execute();
     }
 
     private void remove(Aluno aluno) {
