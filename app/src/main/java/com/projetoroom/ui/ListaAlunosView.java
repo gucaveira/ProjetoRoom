@@ -7,6 +7,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.projetoroom.asynctask.BuscaAlunoTask;
+import com.projetoroom.asynctask.RemoverAlunoTask;
 import com.projetoroom.model.Aluno;
 import com.projetoroom.room.ProjetoDatabase;
 import com.projetoroom.room.dao.AlunoDAO;
@@ -44,8 +45,8 @@ public class ListaAlunosView {
     }
 
     private void remove(Aluno aluno) {
-        dao.remove(aluno);
-        adapter.remove(aluno);
+        new RemoverAlunoTask(aluno, dao, adapter).execute();
+
     }
 
     public void configuraAdapter(ListView listaDeAlunos) {
