@@ -2,10 +2,13 @@ package com.projetoroom.asynctask;
 
 import android.os.AsyncTask;
 
+import com.projetoroom.model.Aluno;
 import com.projetoroom.room.dao.AlunoDAO;
 import com.projetoroom.ui.adapter.ListaAlunosAdapter;
 
-public class BuscaAlunoTask extends AsyncTask {
+import java.util.List;
+
+public class BuscaAlunoTask extends AsyncTask<Void, Void, List<Aluno>> {
 
     private final AlunoDAO dao;
     private final ListaAlunosAdapter adapter;
@@ -16,8 +19,13 @@ public class BuscaAlunoTask extends AsyncTask {
     }
 
     @Override
-    protected Object doInBackground(Object[] objects) {
-        adapter.atualiza(dao.todos());
-        return null;
+    protected List<Aluno> doInBackground(Void... voids) {
+        return dao.todos();
+    }
+
+    @Override
+    protected void onPostExecute(List<Aluno> todosAlunos) {
+        super.onPostExecute(todosAlunos);
+        adapter.atualiza(todosAlunos);
     }
 }
