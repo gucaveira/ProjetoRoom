@@ -13,7 +13,7 @@ public class Telefone {
     private int id;
     private String numero;
 
-    // @ColumnInfo(name = "aluno_id") modifcador de como vai ser gravado no banco de dados
+    // @ColumnInfo(name = "aluno_id") modifcador de nome, indicando como vai ser gravado no banco de dados
     @ForeignKey(entity = Aluno.class,
             parentColumns = "id",
             childColumns = "alunoId",

@@ -104,9 +104,9 @@ public class FormularioAlunoActivity extends AppCompatActivity {
         finish();
     }
 
-    private Telefone criaTelefone(EditText campoTelefoneFixo, TipoTelefone fixo) {
-        String numeroFixo = campoTelefoneFixo.getText().toString();
-        return new Telefone(numeroFixo, fixo);
+    private Telefone criaTelefone(EditText campoTelefone, TipoTelefone tipo) {
+        String numero = campoTelefone.getText().toString();
+        return new Telefone(numero, tipo);
     }
 
     private void salvaAluno(Telefone telefoneFixo, Telefone telefoneCelular) {
