@@ -9,6 +9,7 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.projetoroom.R;
+import com.projetoroom.asynctask.SalvaAlunoTask;
 import com.projetoroom.model.Aluno;
 import com.projetoroom.model.Telefone;
 import com.projetoroom.model.TipoTelefone;
@@ -110,9 +111,8 @@ public class FormularioAlunoActivity extends AppCompatActivity {
     }
 
     private void salvaAluno(Telefone telefoneFixo, Telefone telefoneCelular) {
-        int alunoId = alunoDAO.salva(aluno).intValue();
-        vinculaAlunoComTelefone(alunoId, telefoneFixo, telefoneCelular);
-        telefoneDAO.salva(telefoneFixo, telefoneCelular);
+        new SalvaAlunoTask(aluno, alunoDAO, telefoneDAO,
+                telefoneFixo, telefoneCelular, this::finish).execute();
     }
 
     private void editaAluno(Telefone telefoneFixo, Telefone telefoneCelular) {
