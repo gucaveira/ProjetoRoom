@@ -34,7 +34,7 @@ public class FormularioAlunoActivity extends AppCompatActivity {
     private AlunoDAO alunoDAO;
     private Aluno aluno;
     private TelefoneDAO telefoneDAO;
-    private List<Telefone> telefonesDoAluno;
+    private List<Telefone> listTelefonesDoAluno;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,9 +83,9 @@ public class FormularioAlunoActivity extends AppCompatActivity {
 
     private void preencheCamposDeTelefone() {
         new BuscaTodosTelefonesDoAlunoTask(telefoneDAO, aluno, telefones -> {
-            this.telefonesDoAluno = telefones;
+            this.listTelefonesDoAluno = telefones;
             for (Telefone telefone :
-                    telefonesDoAluno) {
+                    listTelefonesDoAluno) {
                 if (telefone.getTipo() == TipoTelefone.FIXO) {
                     campoTelefoneFixo.setText(telefone.getNumero());
                 } else {
@@ -121,7 +121,7 @@ public class FormularioAlunoActivity extends AppCompatActivity {
 
     private void editaAluno(Telefone telefoneFixo, Telefone telefoneCelular) {
         new EditaAlunoTask(aluno, alunoDAO, telefoneDAO,
-                telefoneFixo, telefoneCelular, telefonesDoAluno,
+                telefoneFixo, telefoneCelular, listTelefonesDoAluno,
                 this::finish).execute();
     }
 
@@ -134,13 +134,9 @@ public class FormularioAlunoActivity extends AppCompatActivity {
 
     private void preencheAluno() {
         String nome = campoNome.getText().toString();
-        String telefoneFixo = campoTelefoneFixo.getText().toString();
-        String telefoneCelular = campoTelefoneCelular.getText().toString();
         String email = campoEmail.getText().toString();
 
         aluno.setNome(nome);
-        // aluno.setTelefoneFixo(telefoneFixo);
-        // aluno.setTelefoneCelular(telefoneCelular);
         aluno.setEmail(email);
     }
 }

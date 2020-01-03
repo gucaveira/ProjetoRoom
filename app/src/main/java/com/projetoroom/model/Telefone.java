@@ -47,15 +47,7 @@ public class Telefone {
         return numero;
     }
 
-    public void setNumero(String numero) {
-        this.numero = numero;
-    }
-
     public TipoTelefone getTipo() {
         return tipo;
-    }
-
-    public void setTipo(TipoTelefone tipo) {
-        this.tipo = tipo;
     }
 }

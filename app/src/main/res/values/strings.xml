@@ -1,11 +1,9 @@
 <resources>
     <string name="app_name">ProjtoRoom</string>
     <string name="nome">Nome</string>
-    <string name="telefoneFixo">Telefone</string>
     <string name="email">E-mail</string>
     <string name="salvar_aluno">Salvar o alunoId</string>
     <string name="remover">Remover</string>
-    <string name="sobrenome">Sobrenome</string>
     <string name="fixo">Fixo</string>
     <string name="celular">Celular</string>
 </resources>

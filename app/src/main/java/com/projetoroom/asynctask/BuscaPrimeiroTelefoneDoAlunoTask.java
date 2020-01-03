@@ -31,7 +31,6 @@ public class BuscaPrimeiroTelefoneDoAlunoTask extends AsyncTask<Void, Void, Tele
     protected void onPostExecute(Telefone primeiroTelefone) {
         super.onPostExecute(primeiroTelefone);
         listener.quandoEncotrado(primeiroTelefone);
-        //campoTelefone.setText(primeiroTelefone.getNumero());
     }
 
     public interface BuscaPrimeiroTelefoneListener {
