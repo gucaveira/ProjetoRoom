@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.projetoroom.R;
 import com.projetoroom.asynctask.BuscaTodosTelefonesDoAlunoTask;
+import com.projetoroom.asynctask.EditaAlunoTask;
 import com.projetoroom.asynctask.SalvaAlunoTask;
 import com.projetoroom.model.Aluno;
 import com.projetoroom.model.Telefone;
@@ -119,28 +120,9 @@ public class FormularioAlunoActivity extends AppCompatActivity {
     }
 
     private void editaAluno(Telefone telefoneFixo, Telefone telefoneCelular) {
-        alunoDAO.edita(aluno);
-        vinculaAlunoComTelefone(aluno.getId(), telefoneFixo, telefoneCelular);
-        atualizaIdsDosTelefones(telefoneFixo, telefoneCelular);
-        telefoneDAO.atualiza(telefoneFixo, telefoneCelular);
-    }
-
-    private void atualizaIdsDosTelefones(Telefone telefoneFixo, Telefone telefoneCelular) {
-        for (Telefone telefone :
-                telefonesDoAluno) {
-            if (telefone.getTipo() == TipoTelefone.FIXO) {
-                telefoneFixo.setId(telefone.getId());
-            } else {
-                telefoneCelular.setId(telefone.getId());
-            }
-        }
-    }
-
-    private void vinculaAlunoComTelefone(int alunoId, Telefone... telefones) {
-        for (Telefone telefone :
-                telefones) {
-            telefone.setAlunoId(alunoId);
-        }
+        new EditaAlunoTask(aluno, alunoDAO, telefoneDAO,
+                telefoneFixo, telefoneCelular, telefonesDoAluno,
+                this::finish).execute();
     }
 
     private void inicializacaoDosCampos() {
