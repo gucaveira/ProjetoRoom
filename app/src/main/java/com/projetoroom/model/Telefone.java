@@ -7,6 +7,8 @@ import androidx.room.PrimaryKey;
 import static androidx.room.ForeignKey.CASCADE;
 
 @Entity
+//@Entity(foreignKeys = @ForeignKey(entity = Aluno.class, parentColumns = "id", childColumns = "alunoId"))
+// assim n preciçando do onUpdate e onDelete.
 public class Telefone {
 
     @PrimaryKey(autoGenerate = true)
